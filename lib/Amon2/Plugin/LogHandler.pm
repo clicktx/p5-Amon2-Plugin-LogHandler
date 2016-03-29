@@ -42,15 +42,58 @@ __END__
 
 =head1 NAME
 
-Amon2::Plugin::LogHandler - It's new $module
+Amon2::Plugin::LogHandler - Log::Handler glue for Amon2
 
 =head1 SYNOPSIS
 
     use Amon2::Plugin::LogHandler;
+    __PACKAGE__->load_plugin('LogHandler');
+
+    # in your config.pl
+    my $basedir =
+      File::Spec->rel2abs( File::Spec->catdir( dirname(__FILE__), '..' ) );
+    my $log_dir = File::Spec->catdir( $basedir, 'var', 'log' );
+
+    'Log::Handler' => {
+        screen => {
+            log_to   => "STDOUT",
+            maxlevel => "debug",
+            minlevel => "emergency",
+        },
+        file => {
+            default => {
+                mode => "append",
+            },
+            debug => {
+                filename => [ $log_dir, "debug.log" ],
+                maxlevel => "debug",
+                minlevel => "emergency",
+            },
+            common => {
+                filename => [ $log_dir, "common.log" ],
+                maxlevel => "info",
+                minlevel => "warn",
+            },
+            error => {
+                filename => [ $log_dir, "error.log" ],
+                maxlevel => "warn",
+                minlevel => "emergency",
+            },
+        },
+    },
+
+    # in your controller
+    $c->log->info('message info');
+    $c->debug('debug message'); #debug is alies
+
 
 =head1 DESCRIPTION
 
-Amon2::Plugin::LogHandler is ...
+Amon2::Plugin::LogHandler is glue for L<Amon2>. This module is L<Amon2::Plugin::LogDispach> forked product.
+
+=head1 SEE ALSO
+
+L<Amon2> L<Log::Handler>
 
 =head1 LICENSE
 
