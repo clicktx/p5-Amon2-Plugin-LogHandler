@@ -29,10 +29,7 @@ sub init {
             $logger;
         },
     );
-    Amon2::Util::add_method(
-        $c, 'debug',
-        sub { shift->log->debug(shift) },
-    );
+    Amon2::Util::add_method( $c, 'debug', sub { shift->log->debug(shift) }, );
 }
 
 1;
