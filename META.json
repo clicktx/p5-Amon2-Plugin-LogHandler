@@ -42,6 +42,8 @@
       },
       "runtime" : {
          "requires" : {
+            "Amon2" : "0",
+            "Log::Handler" : "0",
             "perl" : "5.008001"
          }
       },
