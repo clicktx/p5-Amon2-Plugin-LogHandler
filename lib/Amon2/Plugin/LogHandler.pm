@@ -5,7 +5,35 @@ use warnings;
 
 our $VERSION = "0.01";
 
+use Log::Handler;
+use Amon2::Util ();
 
+sub init {
+    my ( $class, $c, $config ) = @_;
+
+    my $conf = $c->config->{'Log::Handler'}
+      || die
+"missing configuration for LogHandler plugin(\$c->{'Log::Handler'} is undefined)";
+    my $logger = Log::Handler->new();
+
+    if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'production' ) {
+        delete $conf->{screen};
+        delete $conf->{file}->{'debug'};
+    }
+    $logger->config( config => $conf ) or die $logger->errstr;
+    Amon2::Util::add_method(
+        $c, 'log',
+        sub {
+            $SIG{__WARN__} = sub { $logger->log( warn => @_ ) };
+            $SIG{__DIE__} = sub { $logger->trace( emergency => @_ ) };
+            $logger;
+        },
+    );
+    Amon2::Util::add_method(
+        $c, 'debug',
+        sub { shift->log->debug(shift) },
+    );
+}
 
 1;
 __END__
@@ -36,4 +64,3 @@ it under the same terms as Perl itself.
 clicktx E<lt>clicktx@gmail.comE<gt>
 
 =cut
-
