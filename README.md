@@ -4,7 +4,7 @@ Amon2::Plugin::LogHandler - Log::Handler glue for Amon2
 
 # SYNOPSIS
     # in your App
-    \_\_PACKAGE\_\_->load\_plugin('LogHandler');
+    __PACKAGE__->load_plugin('LogHandler');
 
     # in your config.pl
     my $basedir =
