@@ -3,9 +3,8 @@
 Amon2::Plugin::LogHandler - Log::Handler glue for Amon2
 
 # SYNOPSIS
-
-    use Amon2::Plugin::LogHandler;
-    __PACKAGE__->load_plugin('LogHandler');
+    # in your App
+    \_\_PACKAGE\_\_->load\_plugin('LogHandler');
 
     # in your config.pl
     my $basedir =
@@ -43,6 +42,11 @@ Amon2::Plugin::LogHandler - Log::Handler glue for Amon2
     # in your controller
     $c->log->info('message info');
     $c->debug('debug message'); #debug is alies
+
+    # your log files
+    % tailf MyApp/var/log/debug.log
+    % tailf MyApp/var/log/common.log
+    % tailf MyApp/var/log/error.log
 
 # DESCRIPTION
 

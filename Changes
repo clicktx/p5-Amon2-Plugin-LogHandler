@@ -2,7 +2,9 @@ Revision history for Perl extension Amon2-Plugin-LogHandler
 
 {{$NEXT}}
 
+0.011 2016-03-30T08:23:03Z
+    - fixed POD
+
 0.01 2016-03-29T10:30:54Z
 
     - original version
-

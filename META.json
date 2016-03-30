@@ -65,6 +65,6 @@
          "web" : "https://github.com/clicktx/p5-Amon2-Plugin-LogHandler"
       }
    },
-   "version" : "0.01",
+   "version" : "0.011",
    "x_serialization_backend" : "JSON::PP version 2.27203"
 }
